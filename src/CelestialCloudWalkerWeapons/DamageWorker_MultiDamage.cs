@@ -12,12 +12,20 @@ namespace CelestialCloudWalkerWeapons
             if (multiDef?.secondaryDamages == null || victim == null)
                 return primaryResult;
 
+
+            Log.Message(multiDef);
+
+
+            Log.Message(multiDef.secondaryDamages.Count);
+
             foreach (DamageData damageData in multiDef.secondaryDamages)
             {
+                Log.Message(damageData);
+
                 DamageInfo secondaryDinfo = new DamageInfo(
                     def: damageData.damage,
                     amount: dinfo.Amount * damageData.multiplier,
-                    armorPenetration: dinfo.ArmorPenetrationInt,
+                    armorPenetration: 1,
                     angle: dinfo.Angle,
                     instigator: dinfo.Instigator,
                     hitPart: dinfo.HitPart,
@@ -25,7 +33,7 @@ namespace CelestialCloudWalkerWeapons
                     category: dinfo.Category
                 );
 
-                secondaryDinfo.SetBodyRegion(dinfo.Height, dinfo.Depth);
+                //secondaryDinfo.SetBodyRegion(dinfo.Height, dinfo.Depth);
                 victim.TakeDamage(secondaryDinfo);
             }
 
